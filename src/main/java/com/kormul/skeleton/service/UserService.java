@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import com.kormul.skeleton.domain.User;
 import com.kormul.skeleton.repository.UserRepository;
 
+import lombok.Data;
+
+@Data
 @Service
 public class UserService {
 	
@@ -41,7 +44,7 @@ public class UserService {
 
 	public User updateUser(Integer id, User user) {
 		Optional<User> userModify = userRepository.findById(id);
-		if(userModify.isPresent()) {
+		if(!userModify.isPresent()) {
 			logger.error("Failed to update. User not Found");
 			throw new NoSuchElementException("Failed to update User");
 		}

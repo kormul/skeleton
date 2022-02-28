@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import com.kormul.skeleton.domain.Trade;
 import com.kormul.skeleton.repository.TradeRepository;
 
+import lombok.Data;
+
+@Data
 @Service
 public class TradeService{
 

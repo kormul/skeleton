@@ -56,24 +56,24 @@ public class CurveTest {
 	}
 	
 	@Test
-	public void createCurvListTest() {
+	public void createCurvTest() {
 		
 		CurvePoint curv = curveService.createCurvePoint(curv1);
-		assertTrue(1 == checkCurvListNoModify(curv));
+		assertTrue(1 == checkCurvNoModify(curv));
 
 	}
 	
 	@Test
-	public void findAllCurvListTest() {
+	public void findAllCurvTest() {
 		List<CurvePoint> curvePoints = curveService.findAllCurvePoint();
-		assertTrue(1 == checkCurvListNoModify(curvePoints.get(0)));
-		assertTrue(2 == checkCurvListNoModify(curvePoints.get(1)));
-		assertTrue(3 == checkCurvListNoModify(curvePoints.get(2)));
+		assertTrue(1 == checkCurvNoModify(curvePoints.get(0)));
+		assertTrue(2 == checkCurvNoModify(curvePoints.get(1)));
+		assertTrue(3 == checkCurvNoModify(curvePoints.get(2)));
 
 	}	
 	
 	@Test
-	public void UpdateCurvListTest() {
+	public void UpdateCurvTest() {
 		CurvePoint curve = new CurvePoint();
 		curve.setId(4);
 		curve.setCurveId(4);
@@ -84,13 +84,13 @@ public class CurveTest {
 	}
 	
 	@Test
-	public void getCurvListTest() {
+	public void getCurvTest() {
 		CurvePoint curvePoint = curveService.getbyId(1);
-		assertTrue(1 == checkCurvListNoModify(curvePoint));
+		assertTrue(1 == checkCurvNoModify(curvePoint));
 
 	}
 	
-	public int checkCurvListNoModify(CurvePoint curve) {
+	public int checkCurvNoModify(CurvePoint curve) {
 		
 		assertTrue(curve.getId() != null);
 		assertTrue(curve.getCurveId() == curve.getId());

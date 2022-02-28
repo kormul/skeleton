@@ -14,7 +14,10 @@ import org.springframework.stereotype.Service;
 import com.kormul.skeleton.domain.RuleName;
 import com.kormul.skeleton.repository.RuleNameRepository;
 
+import lombok.Data;
+
 @Service
+@Data
 public class RuleNameService {
 	
 	private static final Logger logger = LogManager.getLogger();

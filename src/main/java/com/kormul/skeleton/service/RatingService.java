@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import com.kormul.skeleton.domain.Rating;
 import com.kormul.skeleton.repository.RatingRepository;
 
+import lombok.Data;
+
+@Data
 @Service
 public class RatingService {
 
