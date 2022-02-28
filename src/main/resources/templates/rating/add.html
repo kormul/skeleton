@@ -15,9 +15,33 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/rating/validate}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of Rating, there are 2 buttons: Save data and Cancel to the list Rating
-			 -->
+
+			<label for="CurveId">Moody's Rating</label>
+			<div class="input-append" align="left">
+					<input type="text" th:field="*{moodysRating}" id="moodysRating" placeholder="   Moody's Rating" required="required"/>
+			</div>
+
+			<label for="Term"> <br/> Sand P Rating </label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{sandPRating}" id="sandPRating" placeholder="   Sand P Rating" required="required"/>
+			</div>
+
+			<label for="Value"> <br/> Fitch Rating</label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{fitchRating}" id="fitchRating" placeholder="   Fitch Rating" required="required"/>
+			</div>
+
+			<label for="Value"> <br/> Order</label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{orderNumber}" id="orderNumber" placeholder="   Order" required="required"/>
+			</div>
+
+			<div class="d-grid gap-2 d-md-block"> <br/>
+				<a class="btn btn-danger col-2" th:href="@{/curvePoint/list}" role="button">
+                    Cancel
+                </a>
+				<button class="btn btn-primary" type="submit">Add Rating</button>
+			</div>
 
 		</form>
 	</div>

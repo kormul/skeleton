@@ -1,4 +1,4 @@
-package com.kormul.skeleton.controllers;
+package com.kormul.skeleton.controllers.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

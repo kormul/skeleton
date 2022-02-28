@@ -3,8 +3,6 @@ package com.kormul.skeleton.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,54 +15,39 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
-	 @Autowired
+	 	@Autowired
 	    private UserDetailsService userDetailsService;
-		
-		@Bean
-		@Override
-		public AuthenticationManager authenticationManagerBean() throws Exception {
-			return super.authenticationManagerBean();
-		}
-		
-		@Autowired
-	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	        auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
-	    }
 		
 		@Bean
 		public PasswordEncoder encoder() {
 			return new BCryptPasswordEncoder();
 		}
 		
-		@Bean
-		public DaoAuthenticationProvider authenticationProvider() {
-			DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-			authProvider.setUserDetailsService(userDetailsService());
-			authProvider.setPasswordEncoder(encoder());
-			
-			return authProvider;
-		}
+	 	@Override
+	 	public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+	        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(encoder());
+	    }
 		
 		@Override
-		protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-			auth.authenticationProvider(authenticationProvider());
+		protected void configure(HttpSecurity http) throws Exception {
+			
+			http.httpBasic().disable();
+			
+			http.csrf().disable().authorizeRequests()
+			.antMatchers("/user/**").hasAuthority("ADMIN")
+			.antMatchers("/bidList/**", "/curvePoint/**", "/rating/**", "/ruleName/**", "/trade/**").authenticated()
+			.antMatchers("/","/rest","/css/**").permitAll()
+			.and()
+			.formLogin()
+			.loginPage("/login")
+			.loginProcessingUrl("/login_submit")
+			.defaultSuccessUrl("/", true)
+			.failureUrl("/login?error")
+			.and()
+			.logout()
+			.logoutUrl("/app-logout").permitAll()
+			.and()
+			.exceptionHandling()
+			.accessDeniedPage("/forbidden");
 		}
-		
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		
-		http.httpBasic().disable();
-		
-		http.csrf().disable()
-		.authorizeRequests()
-		.antMatchers("/", "/home", "/login", "/403", "/*.css").permitAll()
-		.anyRequest().authenticated()
-		.and()
-		.formLogin()
-		.loginPage("/login")
-		.loginProcessingUrl("/login")
-		.defaultSuccessUrl("/home", true)
-		.failureUrl("/login?error");
-	}
-	
 }

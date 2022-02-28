@@ -1,7 +1,9 @@
-package com.kormul.skeleton.controllers;
+package com.kormul.skeleton.controllers.web;
 
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,22 +16,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kormul.skeleton.domain.User;
 import com.kormul.skeleton.repository.UserRepository;
+import com.kormul.skeleton.service.UserService;
 
 @Controller
 public class UserController {
 	
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+	UserService userService;
+	
+	private static final Logger logger = LogManager.getLogger(UserController.class);
 
     @RequestMapping("/user/list")
     public String home(Model model)
     {
-        model.addAttribute("users", userRepository.findAll());
+    	logger.debug("get request User : List");
+    	model.addAttribute("users", userService.findAllUser());
         return "user/list";
     }
 
     @GetMapping("/user/add")
-    public String addUser(User bid) {
+    public String addUser(Model model) {
+    	User user = new User();
+    	model.addAttribute("user",user);
         return "user/add";
     }
 

@@ -15,10 +15,60 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/rating/update/{id}(id=${rating.id})}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of Rating, there are 2 buttons: Update data and Cancel to the Rating
-			 -->
-		</form>
+		
+			<div class="form-group">
+                <label for="account" class="col-sm-2 control-label">Moody's Rating</label>
+                <div class="input-append" align="left">
+                    <input type="text" th:field="*{moodysRating}"
+                           class="form-control mb-4 col-4" placeholder="moodys Rating" id="moodysRating">
+                </div>
+                <div class="col-sm-10 mt-1">
+                    <p class="text-danger" th:if="${#fields.hasErrors('moodysRating')}" th:errors="*{moodysRating}"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="type" class="col-sm-2 control-label">Sand P Rating</label>
+                <div class="input-append" align="left">
+                    <input type="text" th:field="*{sandPRating}"
+                           class="form-control mb-4 col-4" placeholder="sand P Rating" id="sandPRating">
+                </div>
+                <div class="col-sm-10 mt-1">
+                    <p class="text-danger" th:if="${#fields.hasErrors('sandPRating')}" th:errors="*{sandPRating}"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="bidQuantity" class="col-sm-2 control-label">Fitch Rating</label>
+                <div class="input-append" align="left">
+                    <input type="text" th:field="*{fitchRating}"
+                           class="form-control mb-4 col-4" placeholder="fitch Rating" id="fitchRating">
+                </div>
+                <div class="col-sm-10 mt-1">
+                    <p class="text-danger" th:if="${#fields.hasErrors('fitchRating')}" th:errors="*{fitchRating}"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="bidQuantity" class="col-sm-2 control-label">Order</label>
+                <div class="input-append" align="left">
+                    <input type="text" th:field="*{orderNumber}"
+                           class="form-control mb-4 col-4" placeholder="order Number" id="orderNumber">
+                </div>
+                <div class="col-sm-10 mt-1">
+                    <p class="text-danger" th:if="${#fields.hasErrors('orderNumber')}" th:errors="*{orderNumber}"></p>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Rating</button>
+            <a class="btn btn-danger" th:href="@{/curvePoint/list}" role="button"
+                       th:onclick="if (!(confirm('Are you sure you want to cancel?'))) return false">
+                        Cancel
+                    </a>
+
+            <br/><br/><br/><br/>
+
+        </form>
 	</div>
 
 </div>

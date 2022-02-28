@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "curvepoint")
 @AllArgsConstructor
+@NoArgsConstructor
 public class CurvePoint {
 	
 	@Id

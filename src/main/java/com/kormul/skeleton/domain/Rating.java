@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "rating")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Rating {
 	
 	@Id

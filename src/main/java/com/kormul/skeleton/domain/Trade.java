@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "trade")
 @AllArgsConstructor
+@NoArgsConstructor
 public class Trade {
 	
 	@Id

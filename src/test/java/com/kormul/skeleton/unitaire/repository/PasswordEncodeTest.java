@@ -1,4 +1,4 @@
-package com.kormul.skeleton;
+package com.kormul.skeleton.unitaire.repository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -15,9 +15,28 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/trade/validate}" th:object="${trade}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of Trade, there are 2 buttons: Save data and Cancel to the list Trade
-			 -->
+
+			<label for="CurveId">Account</label>
+			<div class="input-append" align="left">
+					<input type="text" th:field="*{account}" id="account" placeholder="   Account" required="required"/>
+			</div>
+
+			<label for="Term"> <br/> Type</label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{type}" id="type" placeholder="   Type" required="required"/>
+			</div>
+
+			<label for="Value"> <br/> Buy Quantity</label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{buyQuantity}" id="buyQuantity" placeholder="   Buy Quantity" required="required"/>
+			</div>
+
+			<div class="d-grid gap-2 d-md-block"> <br/>
+				<a class="btn btn-danger col-2" th:href="@{/trade/list}" role="button">
+                    Cancel
+                </a>
+				<button class="btn btn-primary" type="submit">Add trade</button>
+			</div>
 
 		</form>
 	</div>

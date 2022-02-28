@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "rulename")
 @AllArgsConstructor
+@NoArgsConstructor
 public class RuleName {
 
 	@Id

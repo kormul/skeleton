@@ -1,10 +1,10 @@
-package com.kormul.skeleton.service;
+package com.kormul.skeleton.auth;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,14 +20,21 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Autowired
 	private UserRepository usersRepository;
 	
+	private static final Logger logger = LogManager.getLogger(UserDetailsServiceImpl.class);
+	
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = usersRepository.getByUsername(username);
-
-		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 		
-		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+		logger.debug("Load User : " + username);
+		Optional<User> user = usersRepository.findByUsername(username);
+		if(!user.isPresent()) {
+			logger.error("Load User error : User "+ username +" not found " );
+			throw new UsernameNotFoundException(username + "Not found!");
+		}
+		else {
+			return new UserDetailsImpl(user.get());
+		}
+		
 	}
-
 }

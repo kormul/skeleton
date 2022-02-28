@@ -18,12 +18,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "bidlist")
 @AllArgsConstructor
+@NoArgsConstructor
 public class BidList {
 
 	@Id
 	@Column(name = "BidListId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer BidListId;
+	private Integer bidListId;
 	
 	@NotBlank(message = "Account is mandatory")
 	@Column(name = "account")

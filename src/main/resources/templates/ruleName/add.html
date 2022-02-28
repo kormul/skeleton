@@ -15,9 +15,44 @@
 
 	<div class="row">
 		<form action="#" th:action="@{/ruleName/validate}" th:object="${ruleName}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of RuleName, there are 2 buttons: Save data and Cancel to the list RuleName
-			 -->
+			
+			<label for="CurveId"> Name</label>
+			<div class="input-append" align="left">
+					<input type="text" th:field="*{name}" id="name" placeholder="   Name" required="required"/>
+			</div>
+
+			<label for="Term"> <br/> Description</label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{description}" id="description" placeholder="   Description" required="required"/>
+			</div>
+
+			<label for="Value"> <br/> json</label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{json}" id="json" placeholder="   json" required="required"/>
+			</div>
+
+			<label for="CurveId"> template</label>
+			<div class="input-append" align="left">
+					<input type="text" th:field="*{template}" id="template" placeholder="   template" required="required"/>
+			</div>
+
+			<label for="Term"> <br/> sql</label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{sqlStr}" id="sqlStr" placeholder="   sql" required="required"/>
+			</div>
+
+			<label for="Value"> <br/> sqlPart</label>
+			<div class="input-append" align="left">
+				<input type="text" th:field="*{sqlPart}" id="sqlPart" placeholder="   sqlPart" required="required"/>
+			</div>
+
+			<div class="d-grid gap-2 d-md-block"> <br/>
+				<a class="btn btn-danger col-2" th:href="@{/ruleName/list}" role="button">
+                    Cancel
+                </a>
+				<button class="btn btn-primary" type="submit">Add trade</button>
+			</div>
+
 
 		</form>
 	</div>
